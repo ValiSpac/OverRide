@@ -1,0 +1,3 @@
+https://www.exploit-db.com/exploits/13409  - 21b payload
+https://wiremask.eu/tools/buffer-overflow-pattern-generator/  - overflow patter generator
+https://www.ired.team/offensive-security/code-injection-process-injection/binary-exploitation/return-to-libc-ret2libc - ret2libc
