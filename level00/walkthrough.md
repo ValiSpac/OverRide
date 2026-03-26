@@ -1,48 +1,35 @@
-First level will wait for a password input, doesnt accept empty strings.
+# Level 00
+
+First level will wait for a password input with the `scanf()` function.
+If it is not equil to 5276 (as decimal number) it will be an invalid password.
+
+So we just type in 5276 to `scanf()` and we are good to go!
+
 ```
-Dump of assembler code for function main:
-   0x08048494 <+0>:	push   %ebp
-   0x08048495 <+1>:	mov    %esp,%ebp
-   0x08048497 <+3>:	and    $0xfffffff0,%esp
-   0x0804849a <+6>:	sub    $0x20,%esp
-   0x0804849d <+9>:	movl   $0x80485f0,(%esp) - "*" 35 times
-   0x080484a4 <+16>:	call   0x8048390 <puts@plt>
-   0x080484a9 <+21>:	movl   $0x8048614,(%esp) - "* \t     -Level00 -\t\t  *"
-   0x080484b0 <+28>:	call   0x8048390 <puts@plt> - 
-   0x080484b5 <+33>:	movl   $0x80485f0,(%esp)
-   0x080484bc <+40>:	call   0x8048390 <puts@plt>
-   0x080484c1 <+45>:	mov    $0x804862c,%eax
-   0x080484c6 <+50>:	mov    %eax,(%esp)
-   0x080484c9 <+53>:	call   0x8048380 <printf@plt>
-   <9> - <53>: Will print the initial prompt for password
-   0x080484ce <+58>:	mov    $0x8048636,%eax - "%d"
-   0x080484d3 <+63>:	lea    0x1c(%esp),%edx - load local var
-   0x080484d7 <+67>:	mov    %edx,0x4(%esp)
-   0x080484db <+71>:	mov    %eax,(%esp)
-   0x080484de <+74>:	call   0x80483d0 <__isoc99_scanf@plt>
-   <58> - <74>: Wait for input - scanf("%d")
-   0x080484e3 <+79>:	mov    0x1c(%esp),%eax
-   0x080484e7 <+83>:	cmp    $0x149c,%eax - compare input with value 5276
-   0x080484ec <+88>:	jne    0x804850d <main+121>
-   0x080484ee <+90>:	movl   $0x8048639,(%esp)
-   0x080484f5 <+97>:	call   0x8048390 <puts@plt>
-   <90> - <97>: puts("\nAuthenticated!");
-   0x080484fa <+102>:	movl   $0x8048649,(%esp)
-   0x08048501 <+109>:	call   0x80483a0 <system@plt> - system("/bin/sh");
-   0x08048506 <+114>:	mov    $0x0,%eax
-   0x0804850b <+119>:	jmp    0x804851e <main+138> - exit with 0
-   0x0804850d <+121>:	movl   $0x8048651,(%esp)
-   0x08048514 <+128>:	call   0x8048390 <puts@plt>
-   <121> - <128>: puts("\nInvalid Password!")
-   0x08048519 <+133>:	mov    $0x1,%eax - exit with 1
-   0x0804851e <+138>:	leave  
-   0x0804851f <+139>:	ret
+08048494    {
+08048494        puts("***********************************");
+080484b0        puts("* \t     -Level00 -\t\t  *");
+080484bc        puts("***********************************");
+080484c9        printf("Password:");
+080484de        int32_t var_14;
+080484de        __isoc99_scanf(0x8048636, &var_14);
+080484de
+080484ec        if (var_14 != 0x149c) # Dec: 5276
+080484ec        {
+08048514            puts("\nInvalid Password!");
+08048519            return 1;
+080484ec        }
+080484ec
+080484f5        puts("\nAuthenticated!");
+08048501        system("/bin/sh");
+08048506        return 0;
+08048494    }
 ```
-First level is simple, we can see from the binary that the input will be compared to "5276" and call system().
+
 ```
 level00@OverRide:~$ ./level00 
 ***********************************
-* 	     -Level00 -		  *
+*       -Level00 -    *
 ***********************************
 Password:5276
 
