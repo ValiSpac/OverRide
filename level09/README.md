@@ -1,6 +1,6 @@
 # Level 09
 
-This is very similar to level 2 funny enough. If you look at the code, the loop in `set_username` runs `i <= 40` (41 iterations) into a 40-byte field, meaning the 41st byte overflows into `msg_len`, which controls how many bytes `set_msg` will copy. We can use this to overflow the message buffer and overwrite the return address.
+This is very similar to level 01 funny enough. If you look at the code, the loop in `set_username` runs `i <= 40` (41 iterations) into a 40-byte field, meaning the 41st byte overflows into `msg_len`, which controls how many bytes `set_msg` will copy. We can use this to overflow the message buffer and overwrite the return address.
 
 We take the pattern from this website [Pattern Generator](https://wiremask.eu/tools/buffer-overflow-pattern-generator/?) and do the following:
 

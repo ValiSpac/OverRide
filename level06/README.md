@@ -1,8 +1,9 @@
+# Level 06
+
 We can see that there are multiple protections in the program, ptrace protection so we can't have another trace of the program and run a debugger on it a stack protector for buffer overflows.
-Considering the code, it will apply a checksum loop on the auth and derive the password from that. 
-To be able to analyze a generated password first we can overwrite the return value of ptrace to only be 0.
-Second we will place a breakpoint before the check to analyze the expected serial number
-```
+Considering the code, it will apply a checksum loop on the auth and derive the password from that. To be able to analyze a generated password first we can overwrite the return value of ptrace to only be 0. Second we will place a breakpoint before the check to analyze the expected serial number.
+
+```c
 (gdb) b *0x080487ba
 Breakpoint 1 at 0x80487ba
 (gdb) b *0x08048866
