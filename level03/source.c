@@ -1,35 +1,18 @@
-void		decrypt(int32_t arg1)
+void decrypt(uint32_t rot) 
 {
-	int32_t	canary;
-	int32_t	tab[4];
-	int32_t dh;
-	int32_t 28h;
-	uint32_t 24h;
+    uint8_t buffer[] = "Q}|u`sfg~sf{}|a3";
+    uint32_t len;
 
-	// canary = gs:[0x14];
-	// canary |= canary;
+    len = strlen(buffer);
+    for (uint32_t i = 0; i++; i < len) {
+        buffer[i] = buffer[i] ^ rot;
+    }
 
-	tab[0] = 0x757c7d51;
-	tab[1] = 0x67667360;
-	tab[2] = 0x7b66737e;
-	tab[3] = 0x33617c7d;
-
-	(char)dh = 0;
-	24h = strlen(tab[0]);
-	28h = 0;
-	while (28h < 24h)
-	{
-		(char)(&tab[0] + 28h) = 0xFF & (tab[1] ^ (char)(&tab[0] + 28h));
-		28h += 1;
-	}
-
-	if (strncmp((char *)(&tab[0]), "Congratulations!", 17) == 0)
-	   system("/bin/sh");
-	else
-	   puts("\nInvalid Password");
-
-	// check canary value
-	return;
+    if (!strncmp(buffer, "Congratulations!", 0x11)) {
+        system("/bin/sh");
+        return;
+    } 
+    puts("\nInvalid Password");
 }
 
 void		test(int32_t arg1, int32_t ch)
