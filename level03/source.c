@@ -58,7 +58,7 @@ int	main(int c, char **argv)
 	puts("***********************************");
 	printf("Password:");
 	scanf("%d", v1);
-	test(v1, 0x1337d00d);
+	test(v1, 322424845);
 
 	return 0;
 }
